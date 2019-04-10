@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="子域名收集在这篇文章有比较详细的记录">
+  <meta name="description" content="常用命令一般shutdown -h now 关机tar -xvf 解压tar -zvf 压缩whereis find 位置 -name 文件搜索 | whereis从数据库查找  find默认在当前目录下寻找which 命令搜索ls -la l详细 a全部ctrl l 清理屏幕ctrl u 清理命令ctrl z 放进后台ctrl r 搜索历史命令history -c 清空历史命令!!重复执行上一条">
 <meta name="keywords" content="security">
 <meta property="og:type" content="article">
-<meta property="og:title" content="信息收集">
-<meta property="og:url" content="http://j1nse.top/2019/04/03/collectMessage/index.html">
+<meta property="og:title" content="linux运维安全相关">
+<meta property="og:url" content="http://j1nse.top/2019/04/07/linux运维安全相关/index.html">
 <meta property="og:site_name" content="cgtx&#39;s blog">
-<meta property="og:description" content="子域名收集在这篇文章有比较详细的记录">
+<meta property="og:description" content="常用命令一般shutdown -h now 关机tar -xvf 解压tar -zvf 压缩whereis find 位置 -name 文件搜索 | whereis从数据库查找  find默认在当前目录下寻找which 命令搜索ls -la l详细 a全部ctrl l 清理屏幕ctrl u 清理命令ctrl z 放进后台ctrl r 搜索历史命令history -c 清空历史命令!!重复执行上一条">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-06T09:06:16.367Z">
+<meta property="og:updated_time" content="2019-04-07T15:17:20.873Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="信息收集">
-<meta name="twitter:description" content="子域名收集在这篇文章有比较详细的记录">
+<meta name="twitter:title" content="linux运维安全相关">
+<meta name="twitter:description" content="常用命令一般shutdown -h now 关机tar -xvf 解压tar -zvf 压缩whereis find 位置 -name 文件搜索 | whereis从数据库查找  find默认在当前目录下寻找which 命令搜索ls -la l详细 a全部ctrl l 清理屏幕ctrl u 清理命令ctrl z 放进后台ctrl r 搜索历史命令history -c 清空历史命令!!重复执行上一条">
 
 
 
@@ -115,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="http://j1nse.top/2019/04/03/collectMessage/">
+  <link rel="canonical" href="http://j1nse.top/2019/04/07/linux运维安全相关/">
 
 
 
@@ -125,7 +125,7 @@
   };
 </script>
 
-  <title>信息收集 | cgtx's blog</title>
+  <title>linux运维安全相关 | cgtx's blog</title>
   
 
 
@@ -324,7 +324,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://j1nse.top/2019/04/03/collectMessage/">
+    <link itemprop="mainEntityOfPage" href="http://j1nse.top/2019/04/07/linux运维安全相关/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="cgtx">
@@ -341,7 +341,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">信息收集
+          <h2 class="post-title" itemprop="name headline">linux运维安全相关
 
               
             
@@ -367,24 +367,12 @@
                 
               
 
-              <time title="创建时间：2019-04-03 16:08:02" itemprop="dateCreated datePublished" datetime="2019-04-03T16:08:02+08:00">2019-04-03</time>
+              <time title="创建时间：2019-04-07 11:26:55 / 修改时间：23:17:20" itemprop="dateCreated datePublished" datetime="2019-04-07T11:26:55+08:00">2019-04-07</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-04-06 17:06:16" itemprop="dateModified" datetime="2019-04-06T17:06:16+08:00">2019-04-06</time>
               
             
           </span>
@@ -436,19 +424,9 @@
       
 
       
-        <h2 id="子域名收集"><a href="#子域名收集" class="headerlink" title="子域名收集"></a>子域名收集</h2><p>在这篇文章有比较详细的记录<br><a id="more"></a><br><a href="https://j1nse.top/2019/04/02/subdomain/#more">https://j1nse.top/2019/04/02/subdomain/#more</a></p>
-<h2 id="真实ip"><a href="#真实ip" class="headerlink" title="真实ip"></a>真实ip</h2><ol>
-<li>判断是否使用cdn：从不同的地区ping网站即可，如果返回ip不同则使用了cdn。 <a href="http://ping.chinaz.com/" target="_blank" rel="noopener">http://ping.chinaz.com/</a></li>
-<li>判断是否使用云waf：试试注入等有害的操作，看相应的页面</li>
-<li>email：许多网站在注册时发邮件，这时候查看email 的源代码，有可能真实IP</li>
-<li>历史记录查询：</li>
-<li><a href="https://dnsdb.io/zh-cn/" target="_blank" rel="noopener">https://dnsdb.io/zh-cn/</a><br><a href="https://x.threatbook.cn/" target="_blank" rel="noopener">https://x.threatbook.cn/</a><br><a href="https://viewdns.info/" target="_blank" rel="noopener">https://viewdns.info/</a><br><a href="http://toolbar.netcraft.com/site_report?url=" target="_blank" rel="noopener">http://toolbar.netcraft.com/site_report?url=</a></li>
-</ol>
-<h2 id="DNS服务器信息"><a href="#DNS服务器信息" class="headerlink" title="DNS服务器信息"></a>DNS服务器信息</h2><ol>
-<li>nslookup</li>
-<li><a href="http://www.yunsee.cn/" target="_blank" rel="noopener">http://www.yunsee.cn/</a></li>
-</ol>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://www.dhcty.com/index.php/archives/108/" target="_blank" rel="noopener">http://www.dhcty.com/index.php/archives/108/</a></p>
+        <h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h4 id="一般"><a href="#一般" class="headerlink" title="一般"></a>一般</h4><p><code>shutdown -h now</code> 关机<br><code>tar -xvf</code> 解压<br><code>tar -zvf</code> 压缩<br><code>whereis</code> <code>find 位置 -name</code> 文件搜索 | whereis从数据库查找  find默认在当前目录下寻找<br><code>which</code> 命令搜索<br><code>ls -la</code> l详细 a全部<br><code>ctrl l</code> 清理屏幕<br><code>ctrl u</code> 清理命令<br><code>ctrl z</code> 放进后台<br><code>ctrl r</code> 搜索历史命令<br><code>history -c</code> 清空历史命令<br><code>!!</code>重复执行上一条命令<br><code>!n</code>重复执行第n个命令<br><code>!xxxx</code> 重复执行以xxxx开头的命令<br><code>cat -n</code> 附带行号<br><code>tac</code> 倒着输出<br><code>tail -n</code> 看最后n行 -c为字节 -f持续查看追加内容<br><code>od</code>以二进制形式读取<br><code>more</code> <code>less</code> 翻页查看<br><code>sed</code></p>
+<h4 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h4><p><code>lastlog</code> 所有用户最后一次登陆时间<br><code>w</code> 显示当前登陆用户和正在执行的指令 <strong>pts/0~n</strong>表示远程登陆，win最多支持2~4,linux支持很多 <strong>tty1~n</strong>表示本机登陆<br><code>useradd xx</code> 添加用户xx<br><code>groupadd xx</code> 添加新工作组xx</p>
+<h4 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h4><h4 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h4><p>w=4;r=2;x=1<br>目录最大权限666 文件最大权限777<br><code>chmod</code> 改权限<br><code>chown</code> 改文件用户组<br><code>lsattr</code> 查看文件隐藏属性<br><code>chattr</code> 改变文件隐藏属性<br><code>umask</code> 改文件默认权限<br>suid <code>chmod 4775</code> <code>chmod u+s</code><br>sgid 既可以针对目录，也可以针对文件，用户必须对此目录有r和x权限，才能进入目录;如果是文件，身份会变成所属组;如果是目录，任何用户在这个目录创建的文件所有者会变成当前目录所有者 <code>chmod 2775</code><br>sbid 只针对目录有效，普通用户对此目录有写入权限;设置之后，普通用户只能添加文件和删除自己的文件</p>
 
       
     </div>
@@ -479,8 +457,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/02/subdomain/" rel="next" title="如何找子域名">
-                <i class="fa fa-chevron-left"></i> 如何找子域名
+              <a href="/2019/04/06/xss-game/" rel="next" title="xss game writeup">
+                <i class="fa fa-chevron-left"></i> xss game writeup
               </a>
             
           </div>
@@ -489,8 +467,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/04/06/xss-game/" rel="prev" title="xss game writeup">
-                xss game writeup <i class="fa fa-chevron-right"></i>
+              <a href="/2019/04/09/php-trick/" rel="prev" title="php_trick">
+                php_trick <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -623,7 +601,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#子域名收集"><span class="nav-number">1.</span> <span class="nav-text">子域名收集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#真实ip"><span class="nav-number">2.</span> <span class="nav-text">真实ip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS服务器信息"><span class="nav-number">3.</span> <span class="nav-text">DNS服务器信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文章"><span class="nav-number">4.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用命令"><span class="nav-number">1.</span> <span class="nav-text">常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一般"><span class="nav-number">1.0.1.</span> <span class="nav-text">一般</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用"><span class="nav-number">1.0.2.</span> <span class="nav-text">常用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#shell"><span class="nav-number">1.0.3.</span> <span class="nav-text">shell</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#权限"><span class="nav-number">1.0.4.</span> <span class="nav-text">权限</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="子域名收集在这篇文章有比较详细的记录">
+  <meta name="description" content="IISIIS5.x/6.01.目录解析建立xx.asp为名称的文件夹，将asp文件放入，访问/xx.asp/xx.jpg，其中xx.jpg可以为任意文件后缀，即可解析 2.文件解析后缀解析：/xx.asp;.jpg  /xx.asp:.jpg(此处需抓包修改文件名) 3.默认解析：/xx.asa，/xx.cer，/xx.cdx 4.PUT漏洞开启WebDAV拓展后，可以用PUT方法上传文件 IIS">
 <meta name="keywords" content="security">
 <meta property="og:type" content="article">
-<meta property="og:title" content="信息收集">
-<meta property="og:url" content="http://j1nse.top/2019/04/03/collectMessage/index.html">
+<meta property="og:title" content="中间件漏洞总结">
+<meta property="og:url" content="http://j1nse.top/2019/04/09/middleware/index.html">
 <meta property="og:site_name" content="cgtx&#39;s blog">
-<meta property="og:description" content="子域名收集在这篇文章有比较详细的记录">
+<meta property="og:description" content="IISIIS5.x/6.01.目录解析建立xx.asp为名称的文件夹，将asp文件放入，访问/xx.asp/xx.jpg，其中xx.jpg可以为任意文件后缀，即可解析 2.文件解析后缀解析：/xx.asp;.jpg  /xx.asp:.jpg(此处需抓包修改文件名) 3.默认解析：/xx.asa，/xx.cer，/xx.cdx 4.PUT漏洞开启WebDAV拓展后，可以用PUT方法上传文件 IIS">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-06T09:06:16.367Z">
+<meta property="og:updated_time" content="2019-04-10T06:50:29.715Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="信息收集">
-<meta name="twitter:description" content="子域名收集在这篇文章有比较详细的记录">
+<meta name="twitter:title" content="中间件漏洞总结">
+<meta name="twitter:description" content="IISIIS5.x/6.01.目录解析建立xx.asp为名称的文件夹，将asp文件放入，访问/xx.asp/xx.jpg，其中xx.jpg可以为任意文件后缀，即可解析 2.文件解析后缀解析：/xx.asp;.jpg  /xx.asp:.jpg(此处需抓包修改文件名) 3.默认解析：/xx.asa，/xx.cer，/xx.cdx 4.PUT漏洞开启WebDAV拓展后，可以用PUT方法上传文件 IIS">
 
 
 
@@ -115,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="http://j1nse.top/2019/04/03/collectMessage/">
+  <link rel="canonical" href="http://j1nse.top/2019/04/09/middleware/">
 
 
 
@@ -125,7 +125,7 @@
   };
 </script>
 
-  <title>信息收集 | cgtx's blog</title>
+  <title>中间件漏洞总结 | cgtx's blog</title>
   
 
 
@@ -324,7 +324,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://j1nse.top/2019/04/03/collectMessage/">
+    <link itemprop="mainEntityOfPage" href="http://j1nse.top/2019/04/09/middleware/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="cgtx">
@@ -341,7 +341,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">信息收集
+          <h2 class="post-title" itemprop="name headline">中间件漏洞总结
 
               
             
@@ -367,7 +367,7 @@
                 
               
 
-              <time title="创建时间：2019-04-03 16:08:02" itemprop="dateCreated datePublished" datetime="2019-04-03T16:08:02+08:00">2019-04-03</time>
+              <time title="创建时间：2019-04-09 17:44:39" itemprop="dateCreated datePublished" datetime="2019-04-09T17:44:39+08:00">2019-04-09</time>
             
 
             
@@ -384,7 +384,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-06 17:06:16" itemprop="dateModified" datetime="2019-04-06T17:06:16+08:00">2019-04-06</time>
+                <time title="修改时间：2019-04-10 14:50:29" itemprop="dateModified" datetime="2019-04-10T14:50:29+08:00">2019-04-10</time>
               
             
           </span>
@@ -436,19 +436,13 @@
       
 
       
-        <h2 id="子域名收集"><a href="#子域名收集" class="headerlink" title="子域名收集"></a>子域名收集</h2><p>在这篇文章有比较详细的记录<br><a id="more"></a><br><a href="https://j1nse.top/2019/04/02/subdomain/#more">https://j1nse.top/2019/04/02/subdomain/#more</a></p>
-<h2 id="真实ip"><a href="#真实ip" class="headerlink" title="真实ip"></a>真实ip</h2><ol>
-<li>判断是否使用cdn：从不同的地区ping网站即可，如果返回ip不同则使用了cdn。 <a href="http://ping.chinaz.com/" target="_blank" rel="noopener">http://ping.chinaz.com/</a></li>
-<li>判断是否使用云waf：试试注入等有害的操作，看相应的页面</li>
-<li>email：许多网站在注册时发邮件，这时候查看email 的源代码，有可能真实IP</li>
-<li>历史记录查询：</li>
-<li><a href="https://dnsdb.io/zh-cn/" target="_blank" rel="noopener">https://dnsdb.io/zh-cn/</a><br><a href="https://x.threatbook.cn/" target="_blank" rel="noopener">https://x.threatbook.cn/</a><br><a href="https://viewdns.info/" target="_blank" rel="noopener">https://viewdns.info/</a><br><a href="http://toolbar.netcraft.com/site_report?url=" target="_blank" rel="noopener">http://toolbar.netcraft.com/site_report?url=</a></li>
-</ol>
-<h2 id="DNS服务器信息"><a href="#DNS服务器信息" class="headerlink" title="DNS服务器信息"></a>DNS服务器信息</h2><ol>
-<li>nslookup</li>
-<li><a href="http://www.yunsee.cn/" target="_blank" rel="noopener">http://www.yunsee.cn/</a></li>
-</ol>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://www.dhcty.com/index.php/archives/108/" target="_blank" rel="noopener">http://www.dhcty.com/index.php/archives/108/</a></p>
+        <h2 id="IIS"><a href="#IIS" class="headerlink" title="IIS"></a>IIS</h2><h3 id="IIS5-x-6-0"><a href="#IIS5-x-6-0" class="headerlink" title="IIS5.x/6.0"></a>IIS5.x/6.0</h3><p>1.目录解析<br>建立xx.asp为名称的文件夹，将asp文件放入，访问/xx.asp/xx.jpg，其中xx.jpg可以为任意文件后缀，即可解析</p>
+<p>2.文件解析<br>后缀解析：/xx.asp;.jpg  /xx.asp:.jpg(此处需抓包修改文件名)</p>
+<p>3.默认解析：<br>/xx.asa，/xx.cer，/xx.cdx</p>
+<p>4.PUT漏洞<br>开启WebDAV拓展后，可以用PUT方法上传文件</p>
+<h3 id="IIS-7-0-IIS-7-5-Nginx-lt-8-03畸形解析漏洞"><a href="#IIS-7-0-IIS-7-5-Nginx-lt-8-03畸形解析漏洞" class="headerlink" title="IIS 7.0/IIS 7.5/ Nginx &lt;8.03畸形解析漏洞"></a>IIS 7.0/IIS 7.5/ Nginx &lt;8.03畸形解析漏洞</h3><p>在默认Fast-CGI开启状况下,上传一个名字为wooyun.jpg，内容为<br><code>&lt;?PHP fputs(fopen(&#39;shell.php&#39;,&#39;w&#39;),&#39;&lt;?php eval($_POST[cmd])?&gt;&#39;);?&gt;</code><br>的文件，然后访问wooyun.jpg/.php,在这个目录下就会生成一句话木马 shell.php</p>
+<h3 id="Nginx-lt-8-03-空字节代码执行漏洞"><a href="#Nginx-lt-8-03-空字节代码执行漏洞" class="headerlink" title="Nginx &lt;8.03 空字节代码执行漏洞"></a>Nginx &lt;8.03 空字节代码执行漏洞</h3><p>在一个文件路径(/xx.jpg)后面加上%00.php会将 /xx.jpg%00.php 解析为 php 文件。</p>
+<h3 id="Apache"><a href="#Apache" class="headerlink" title="Apache"></a>Apache</h3><p>Apache将从右至左开始判断后缀，若x3非可识别后缀，再判断x2，直到找到可识别后缀为止，然后将该可识别后缀进解析<br>test.php.x1.x2.x3则会被解析为php<br>php|php3|phtml|php4|php5</p>
 
       
     </div>
@@ -479,8 +473,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/02/subdomain/" rel="next" title="如何找子域名">
-                <i class="fa fa-chevron-left"></i> 如何找子域名
+              <a href="/2019/04/09/php-trick/" rel="next" title="php_trick">
+                <i class="fa fa-chevron-left"></i> php_trick
               </a>
             
           </div>
@@ -489,8 +483,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/04/06/xss-game/" rel="prev" title="xss game writeup">
-                xss game writeup <i class="fa fa-chevron-right"></i>
+              <a href="/2019/04/10/hand/" rel="prev" title="姿势手册">
+                姿势手册 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -623,7 +617,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#子域名收集"><span class="nav-number">1.</span> <span class="nav-text">子域名收集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#真实ip"><span class="nav-number">2.</span> <span class="nav-text">真实ip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS服务器信息"><span class="nav-number">3.</span> <span class="nav-text">DNS服务器信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文章"><span class="nav-number">4.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIS"><span class="nav-number">1.</span> <span class="nav-text">IIS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IIS5-x-6-0"><span class="nav-number">1.1.</span> <span class="nav-text">IIS5.x/6.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IIS-7-0-IIS-7-5-Nginx-lt-8-03畸形解析漏洞"><span class="nav-number">1.2.</span> <span class="nav-text">IIS 7.0/IIS 7.5/ Nginx &lt;8.03畸形解析漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nginx-lt-8-03-空字节代码执行漏洞"><span class="nav-number">1.3.</span> <span class="nav-text">Nginx &lt;8.03 空字节代码执行漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Apache"><span class="nav-number">1.4.</span> <span class="nav-text">Apache</span></a></li></ol></li></ol></div>
             
 
           </div>

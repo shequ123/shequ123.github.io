@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/me_med.webp?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/me_med.webp?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="xxe介绍XXE(XML External Entity Injection) 全称为 XML外部实体注入引入外部实体方式有多种，比如：  file:// 协议直接引用本地文件 http://xxx.com/evil.dtd 引用恶意dtd 由恶意dtd引用本地文件 不同程序支持的协议不一样，可以造成其他危害  危害 读取任意文件直接用&amp;lt;!ENTITY xxe SYSTEM “file://">
+<meta name="keywords" content="security">
+<meta property="og:type" content="article">
+<meta property="og:title" content="姿势手册">
+<meta property="og:url" content="http://j1nse.top/2019/04/10/hand/index.html">
+<meta property="og:site_name" content="cgtx&#39;s blog">
+<meta property="og:description" content="xxe介绍XXE(XML External Entity Injection) 全称为 XML外部实体注入引入外部实体方式有多种，比如：  file:// 协议直接引用本地文件 http://xxx.com/evil.dtd 引用恶意dtd 由恶意dtd引用本地文件 不同程序支持的协议不一样，可以造成其他危害  危害 读取任意文件直接用&amp;lt;!ENTITY xxe SYSTEM “file://">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-10T07:24:40.995Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="姿势手册">
+<meta name="twitter:description" content="xxe介绍XXE(XML External Entity Injection) 全称为 XML外部实体注入引入外部实体方式有多种，比如：  file:// 协议直接引用本地文件 http://xxx.com/evil.dtd 引用恶意dtd 由恶意dtd引用本地文件 不同程序支持的协议不一样，可以造成其他危害  危害 读取任意文件直接用&amp;lt;!ENTITY xxe SYSTEM “file://">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://j1nse.top/2019/04/10/hand/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>姿势手册 | cgtx's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">cgtx's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://j1nse.top/2019/04/10/hand/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cgtx">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me.webp">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cgtx's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">姿势手册
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-10 15:24:22 / 修改时间：15:24:40" itemprop="dateCreated datePublished" datetime="2019-04-10T15:24:22+08:00">2019-04-10</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/web安全/" itemprop="url" rel="index"><span itemprop="name">web安全</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="xxe"><a href="#xxe" class="headerlink" title="xxe"></a>xxe</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>XXE(XML External Entity Injection) 全称为 XML外部实体注入<br>引入外部实体方式有多种，比如：</p>
+<ol>
+<li>file:// 协议直接引用本地文件</li>
+<li><a href="http://xxx.com/evil.dtd" target="_blank" rel="noopener">http://xxx.com/evil.dtd</a> 引用恶意dtd</li>
+<li>由恶意dtd引用本地文件</li>
+<li>不同程序支持的协议不一样，可以造成其他危害</li>
+</ol>
+<h2 id="危害"><a href="#危害" class="headerlink" title="危害"></a>危害</h2><ol>
+<li><p>读取任意文件<br>直接用&lt;!ENTITY xxe SYSTEM “file:///etc/passwd”&gt;</p>
+<d>&xxe;</d>
+</li>
+<li><p>执行系统命令<br>php的拓展协议 <code>expect://id</code></p>
+</li>
+<li><p>探测内网端口<br>&lt;!ENTITY xxe SYSTEM “<a href="http://192.168.1.1:81&quot;&gt;" target="_blank" rel="noopener">http://192.168.1.1:81&quot;&gt;</a></p>
+</li>
+<li><p>攻击内网网站<br>url里附带特定payload</p>
+</li>
+</ol>
+<h2 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h2><ol>
+<li><p>禁用外部实体<br>如php可以 <code>libxml_disable_entity_loader(true);</code><br>python <code>from lxml import etree
+xmlData = etree.parse(xmlSource,etree.XMLParser(resolve_entities=False))</code></p>
+</li>
+<li><p>过滤用户提交的XML数据<br>关键词<code>SYSTEM</code>和<code>PUBLIC</code></p>
+</li>
+</ol>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>如果dtd里的地址有特殊字符，就要用CDATA包裹起来防止解析；这时候要用参数实体<code>% xxx;</code>来拼接语句</p>
+<h1 id="浏览器安全"><a href="#浏览器安全" class="headerlink" title="浏览器安全"></a>浏览器安全</h1><p>以同源策略为基础，延伸的<code>access-control-allow-origin</code>等</p>
+<h1 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h1><h2 id="危害-1"><a href="#危害-1" class="headerlink" title="危害"></a>危害</h2><ol>
+<li>盗取cookie</li>
+<li>蠕虫</li>
+<li>代替用户操作，例如删除文章，发送动态等</li>
+<li>获取用户信息</li>
+</ol>
+<h2 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h2><ol>
+<li>location.hash<br>用于反射xss</li>
+<li>利用字符编码吞掉转义符号</li>
+<li>上下注释结合，绕过长度限制</li>
+<li>事件</li>
+<li>style样式</li>
+<li><base>标签</li>
+<li>windows.name缩短payload</li>
+<li>地址中输出</li>
+<li>伪协议<br>除了javascript外还有vbscript,<br>dataURI-&gt;<code>data:text/html;base64,xxxx</code></li>
+<li>比较特殊的、新的标签比如<video></video></li>
+<li>http头CRLF注入</li>
+</ol>
+<h2 id="防御-1"><a href="#防御-1" class="headerlink" title="防御"></a>防御</h2><ol>
+<li>浏览器自带xss过滤</li>
+<li>httponly</li>
+<li>输入过滤</li>
+<li>输出过滤</li>
+<li>html实体编码</li>
+</ol>
+<h1 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>通过恶意网页对用户已经登陆的页面进行请求，会带上seesion cookie，模仿用户操作</p>
+<h2 id="危害-2"><a href="#危害-2" class="headerlink" title="危害"></a>危害</h2><ol>
+<li>模拟用户操作，删除等</li>
+<li>蠕虫</li>
+</ol>
+<h2 id="防御-2"><a href="#防御-2" class="headerlink" title="防御"></a>防御</h2><ol>
+<li>验证码</li>
+<li>refer check（考虑到隐私，不一定有效）</li>
+<li>token<br>token同时放在session和表单中，服务器判断是否一致</li>
+</ol>
+<h2 id="本质"><a href="#本质" class="headerlink" title="本质"></a>本质</h2><p>所有的重要操作参数都是攻击者已知的</p>
+<h1 id="Sql注入"><a href="#Sql注入" class="headerlink" title="Sql注入"></a>Sql注入</h1><p>数据与代码分离原则</p>
+<h2 id="普通注入"><a href="#普通注入" class="headerlink" title="普通注入"></a>普通注入</h2><ol>
+<li><code>/**/</code>代替空格</li>
+<li>字符串16进制编码</li>
+<li>char()</li>
+<li>单行注释<code>-- -</code>,<code>#</code>,<code>;%00</code></li>
+<li>多行注释<code>/*xxxx*/</code>,`</li>
+<li>连接符<code>+</code>,<code>||</code><h2 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a>盲注</h2>没有回显<h2 id="时间盲注"><a href="#时间盲注" class="headerlink" title="时间盲注"></a>时间盲注</h2><h2 id="攻击"><a href="#攻击" class="headerlink" title="攻击"></a>攻击</h2></li>
+<li>读取文件 <code>LOAD_FILE</code></li>
+<li>写入shell</li>
+<li>命令执行<h2 id="宽字符"><a href="#宽字符" class="headerlink" title="宽字符"></a>宽字符</h2>有时候会吞掉转义字符<h2 id="防御-3"><a href="#防御-3" class="headerlink" title="防御"></a>防御</h2></li>
+<li>过滤</li>
+<li>预编译语句</li>
+<li>使用储存过程</li>
+<li>检查数据类型</li>
+<li>使用安全函数</li>
+</ol>
+<h1 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h1><h2 id="技巧-1"><a href="#技巧-1" class="headerlink" title="技巧"></a>技巧</h2><ol>
+<li>后缀名绕过<code>php2</code>,<code>php4</code>,<code>asa</code></li>
+<li><code>%00</code>,<code>[\0]</code>,<code>;</code>截断</li>
+<li>文件头伪造</li>
+</ol>
+<h2 id="危害-3"><a href="#危害-3" class="headerlink" title="危害"></a>危害</h2><ol>
+<li>上传shell</li>
+<li>上传文件钓鱼</li>
+</ol>
+<h2 id="防御-4"><a href="#防御-4" class="headerlink" title="防御"></a>防御</h2><ol>
+<li>文件上传目录不可执行</li>
+<li>白名单判断文件类型</li>
+<li>单独设置文件服务器域名</li>
+</ol>
+<h1 id="认证与会话管理"><a href="#认证与会话管理" class="headerlink" title="认证与会话管理"></a>认证与会话管理</h1><h2 id="session"><a href="#session" class="headerlink" title="session"></a>session</h2><h2 id="sso"><a href="#sso" class="headerlink" title="sso"></a>sso</h2><h1 id="劫持"><a href="#劫持" class="headerlink" title="劫持"></a>劫持</h1><h2 id="clickJacking"><a href="#clickJacking" class="headerlink" title="clickJacking"></a>clickJacking</h2><p>和csrf原理一样，诱导用户完成一些操作</p>
+<h2 id="图片劫持"><a href="#图片劫持" class="headerlink" title="图片劫持"></a>图片劫持</h2><p>把恶意图片覆盖到原来的地方，点击的时候触发一些东西，或者覆盖其他东西</p>
+<h2 id="其他劫持"><a href="#其他劫持" class="headerlink" title="其他劫持"></a>其他劫持</h2><p>假的地址栏，假的通知，假的全屏</p>
+<h2 id="防御-5"><a href="#防御-5" class="headerlink" title="防御"></a>防御</h2><ol>
+<li>禁止跨域的<code>iframe</code></li>
+<li><code>X-frame-options</code>头<br><code>dely</code>时禁止任何frame<br><code>sameorigin</code>允许同源frame<br><code>alow-from origin</code>定义允许假加载的地址</li>
+<li>使用<code>sandbox</code>属性可以更精确的控制同源，表单，脚本等</li>
+</ol>
+<h1 id="密码学"><a href="#密码学" class="headerlink" title="密码学"></a>密码学</h1><ol>
+<li>重复密钥</li>
+<li>bit反转</li>
+<li>弱随机IV</li>
+<li>padding oracle attack<h2 id="密钥管理"><a href="#密钥管理" class="headerlink" title="密钥管理"></a>密钥管理</h2><h2 id="伪随机数"><a href="#伪随机数" class="headerlink" title="伪随机数"></a>伪随机数</h2><h1 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h1><h2 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h2></li>
+<li><code>include()</code></li>
+<li><code>require()</code></li>
+<li><code>include_once()</code></li>
+<li><code>require_once()</code></li>
+<li>包含用户上传的文件</li>
+<li>包含<code>data://</code>或<code>php://input</code>等伪协议</li>
+<li>包含<code>session</code>文件</li>
+<li>包含日志文件，然后在日志文件里录入恶意log</li>
+</ol>
+<h2 id="变量覆盖"><a href="#变量覆盖" class="headerlink" title="变量覆盖"></a>变量覆盖</h2><ol>
+<li><em><code>register_globals</code>开启</em></li>
+<li><code>extract()</code></li>
+<li><code>$$x</code></li>
+<li><code>import_request_variables()</code></li>
+<li><code>parse_str()</code><h2 id="代码执行"><a href="#代码执行" class="headerlink" title="代码执行"></a>代码执行</h2></li>
+<li>危险函数:<code>poen()</code>,<code>system()</code>,<code>passthru()</code>,<code>exec()</code>,<code>eval()</code>,<code>assert()</code>,<code>shell_exec()</code>,<code>escapeshellcmd</code>,<code>pcntl_exec()</code>,<code>preg_replace()</code></li>
+</ol>
+<h2 id="文件写入"><a href="#文件写入" class="headerlink" title="文件写入"></a>文件写入</h2><ol>
+<li><code>file_put_contents()</code>,<code>fwrite()</code>,<code>fputs()</code>,<h2 id="动态函数执行"><a href="#动态函数执行" class="headerlink" title="动态函数执行"></a>动态函数执行</h2><h2 id="回调函数执行"><a href="#回调函数执行" class="headerlink" title="回调函数执行"></a>回调函数执行</h2><h2 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h2></li>
+<li>class魔法函数执行</li>
+</ol>
+<h2 id="防御-6"><a href="#防御-6" class="headerlink" title="防御"></a>防御</h2><ol>
+<li><code>register_globals = OFF</code></li>
+<li><code>open_basedir = /home/web/html</code></li>
+<li><code>allow_url_include = off ,allow_url_open=off</code></li>
+<li><code>display_errors</code>用<code>log_errors</code></li>
+<li><code>magic_quotes_gpc = OFF</code></li>
+<li><code>session.cookie_httponly = 1</code></li>
+<li></li>
+</ol>
+<h2 id="远程文件包含"><a href="#远程文件包含" class="headerlink" title="远程文件包含"></a>远程文件包含</h2><ol>
+<li><code>allow_url_include()</code>打开</li>
+</ol>
+<h1 id="暂时不知道分类"><a href="#暂时不知道分类" class="headerlink" title="暂时不知道分类"></a>暂时不知道分类</h1><h2 id="技巧-2"><a href="#技巧-2" class="headerlink" title="技巧"></a>技巧</h2><ol>
+<li><a>可以有noreferrer类型，可以不发送referer</a></li>
+<li><canvas>可以识别简单的验证码,图片导入，分割字符</canvas></li>
+<li>postmessage</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/09/middleware/" rel="next" title="中间件漏洞总结">
+                <i class="fa fa-chevron-left"></i> 中间件漏洞总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/me.webp" alt="cgtx">
+            
+              <p class="site-author-name" itemprop="name">cgtx</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#xxe"><span class="nav-number">1.</span> <span class="nav-text">xxe</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#危害"><span class="nav-number">1.2.</span> <span class="nav-text">危害</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防御"><span class="nav-number">1.3.</span> <span class="nav-text">防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">1.4.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#浏览器安全"><span class="nav-number">2.</span> <span class="nav-text">浏览器安全</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#XSS"><span class="nav-number">3.</span> <span class="nav-text">XSS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#危害-1"><span class="nav-number">3.1.</span> <span class="nav-text">危害</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#技巧"><span class="nav-number">3.2.</span> <span class="nav-text">技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防御-1"><span class="nav-number">3.3.</span> <span class="nav-text">防御</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CSRF"><span class="nav-number">4.</span> <span class="nav-text">CSRF</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">4.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#危害-2"><span class="nav-number">4.2.</span> <span class="nav-text">危害</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防御-2"><span class="nav-number">4.3.</span> <span class="nav-text">防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本质"><span class="nav-number">4.4.</span> <span class="nav-text">本质</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sql注入"><span class="nav-number">5.</span> <span class="nav-text">Sql注入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#普通注入"><span class="nav-number">5.1.</span> <span class="nav-text">普通注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#盲注"><span class="nav-number">5.2.</span> <span class="nav-text">盲注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间盲注"><span class="nav-number">5.3.</span> <span class="nav-text">时间盲注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#攻击"><span class="nav-number">5.4.</span> <span class="nav-text">攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#宽字符"><span class="nav-number">5.5.</span> <span class="nav-text">宽字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防御-3"><span class="nav-number">5.6.</span> <span class="nav-text">防御</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件上传"><span class="nav-number">6.</span> <span class="nav-text">文件上传</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#技巧-1"><span class="nav-number">6.1.</span> <span class="nav-text">技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#危害-3"><span class="nav-number">6.2.</span> <span class="nav-text">危害</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防御-4"><span class="nav-number">6.3.</span> <span class="nav-text">防御</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#认证与会话管理"><span class="nav-number">7.</span> <span class="nav-text">认证与会话管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#session"><span class="nav-number">7.1.</span> <span class="nav-text">session</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sso"><span class="nav-number">7.2.</span> <span class="nav-text">sso</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#劫持"><span class="nav-number">8.</span> <span class="nav-text">劫持</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#clickJacking"><span class="nav-number">8.1.</span> <span class="nav-text">clickJacking</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图片劫持"><span class="nav-number">8.2.</span> <span class="nav-text">图片劫持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他劫持"><span class="nav-number">8.3.</span> <span class="nav-text">其他劫持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防御-5"><span class="nav-number">8.4.</span> <span class="nav-text">防御</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#密码学"><span class="nav-number">9.</span> <span class="nav-text">密码学</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密钥管理"><span class="nav-number">9.1.</span> <span class="nav-text">密钥管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伪随机数"><span class="nav-number">9.2.</span> <span class="nav-text">伪随机数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP"><span class="nav-number">10.</span> <span class="nav-text">PHP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件包含"><span class="nav-number">10.1.</span> <span class="nav-text">文件包含</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量覆盖"><span class="nav-number">10.2.</span> <span class="nav-text">变量覆盖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码执行"><span class="nav-number">10.3.</span> <span class="nav-text">代码执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件写入"><span class="nav-number">10.4.</span> <span class="nav-text">文件写入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态函数执行"><span class="nav-number">10.5.</span> <span class="nav-text">动态函数执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回调函数执行"><span class="nav-number">10.6.</span> <span class="nav-text">回调函数执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反序列化"><span class="nav-number">10.7.</span> <span class="nav-text">反序列化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防御-6"><span class="nav-number">10.8.</span> <span class="nav-text">防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程文件包含"><span class="nav-number">10.9.</span> <span class="nav-text">远程文件包含</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#暂时不知道分类"><span class="nav-number">11.</span> <span class="nav-text">暂时不知道分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#技巧-2"><span class="nav-number">11.1.</span> <span class="nav-text">技巧</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cgtx</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">本博客与 <a href="http://github.com" class="theme-link" rel="noopener" target="_blank">Github</a> 深度合作!(笑)</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – NexT.Gemini</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <script id="ribbon" size="300" alpha="0.6" zindex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
