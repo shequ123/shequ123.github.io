@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="常用命令一般shutdown -h now 关机tar -xvf 解压tar -zvf 压缩whereis find 位置 -name 文件搜索 | whereis从数据库查找  find默认在当前目录下寻找which 命令搜索ls -la l详细 a全部ctrl l 清理屏幕ctrl u 清理命令ctrl z 放进后台ctrl r 搜索历史命令history -c 清空历史命令!!重复执行上一条">
+  <meta name="description" content="函数绕过in_array()bool in_array ( mixed $needle , array $haystack [, bool $strict = FALSE ] )第三个参数默认为false,类型会转换,如果$needle是7shell.php那么7就会被解析为数字7.当$strict为true是，会判断类型是否相同 htmlspecialchars()html实体编码用JavaSc">
 <meta name="keywords" content="security">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux运维安全相关">
-<meta property="og:url" content="http://j1nse.top/2019/04/07/linux运维安全相关/index.html">
+<meta property="og:title" content="php审计trick">
+<meta property="og:url" content="http://j1nse.top/2019/04/13/php-hand/index.html">
 <meta property="og:site_name" content="cgtx&#39;s blog">
-<meta property="og:description" content="常用命令一般shutdown -h now 关机tar -xvf 解压tar -zvf 压缩whereis find 位置 -name 文件搜索 | whereis从数据库查找  find默认在当前目录下寻找which 命令搜索ls -la l详细 a全部ctrl l 清理屏幕ctrl u 清理命令ctrl z 放进后台ctrl r 搜索历史命令history -c 清空历史命令!!重复执行上一条">
+<meta property="og:description" content="函数绕过in_array()bool in_array ( mixed $needle , array $haystack [, bool $strict = FALSE ] )第三个参数默认为false,类型会转换,如果$needle是7shell.php那么7就会被解析为数字7.当$strict为true是，会判断类型是否相同 htmlspecialchars()html实体编码用JavaSc">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-11T17:35:06.545Z">
+<meta property="og:updated_time" content="2019-04-13T08:34:01.465Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="linux运维安全相关">
-<meta name="twitter:description" content="常用命令一般shutdown -h now 关机tar -xvf 解压tar -zvf 压缩whereis find 位置 -name 文件搜索 | whereis从数据库查找  find默认在当前目录下寻找which 命令搜索ls -la l详细 a全部ctrl l 清理屏幕ctrl u 清理命令ctrl z 放进后台ctrl r 搜索历史命令history -c 清空历史命令!!重复执行上一条">
+<meta name="twitter:title" content="php审计trick">
+<meta name="twitter:description" content="函数绕过in_array()bool in_array ( mixed $needle , array $haystack [, bool $strict = FALSE ] )第三个参数默认为false,类型会转换,如果$needle是7shell.php那么7就会被解析为数字7.当$strict为true是，会判断类型是否相同 htmlspecialchars()html实体编码用JavaSc">
 
 
 
@@ -115,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="http://j1nse.top/2019/04/07/linux运维安全相关/">
+  <link rel="canonical" href="http://j1nse.top/2019/04/13/php-hand/">
 
 
 
@@ -125,7 +125,7 @@
   };
 </script>
 
-  <title>linux运维安全相关 | cgtx's blog</title>
+  <title>php审计trick | cgtx's blog</title>
   
 
 
@@ -324,7 +324,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://j1nse.top/2019/04/07/linux运维安全相关/">
+    <link itemprop="mainEntityOfPage" href="http://j1nse.top/2019/04/13/php-hand/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="cgtx">
@@ -341,7 +341,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">linux运维安全相关
+          <h2 class="post-title" itemprop="name headline">php审计trick
 
               
             
@@ -367,24 +367,12 @@
                 
               
 
-              <time title="创建时间：2019-04-07 11:26:55" itemprop="dateCreated datePublished" datetime="2019-04-07T11:26:55+08:00">2019-04-07</time>
+              <time title="创建时间：2019-04-13 16:06:08 / 修改时间：16:34:01" itemprop="dateCreated datePublished" datetime="2019-04-13T16:06:08+08:00">2019-04-13</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-04-12 01:35:06" itemprop="dateModified" datetime="2019-04-12T01:35:06+08:00">2019-04-12</time>
               
             
           </span>
@@ -436,14 +424,9 @@
       
 
       
-        <h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h4 id="一般"><a href="#一般" class="headerlink" title="一般"></a>一般</h4><p><code>shutdown -h now</code> 关机<br><code>tar -xvf</code> 解压<br><code>tar -zvf</code> 压缩<br><code>whereis</code> <code>find 位置 -name</code> 文件搜索 | whereis从数据库查找  find默认在当前目录下寻找<br><code>which</code> 命令搜索<br><code>ls -la</code> l详细 a全部<br><code>ctrl l</code> 清理屏幕<br><code>ctrl u</code> 清理命令<br><code>ctrl z</code> 放进后台<br><code>ctrl r</code> 搜索历史命令<br><code>history -c</code> 清空历史命令<br><code>!!</code>重复执行上一条命令<br><code>!n</code>重复执行第n个命令<br><code>!xxxx</code> 重复执行以xxxx开头的命令<br><code>cat -n</code> 附带行号<br><code>tac</code> 倒着输出<br><code>tail -n</code> 看最后n行 -c为字节 -f持续查看追加内容<br><code>od</code>以二进制形式读取<br><code>more</code> <code>less</code> 翻页查看<br><code>sed</code></p>
-<h4 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h4><p><code>lastlog</code> 所有用户最后一次登陆时间<br><code>w</code> 显示当前登陆用户和正在执行的指令 <strong>pts/0~n</strong>表示远程登陆，win最多支持2~4,linux支持很多 <strong>tty1~n</strong>表示本机登陆<br><code>useradd xx</code> 添加用户xx<br><code>groupadd xx</code> 添加新工作组xx</p>
-<h4 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h4><h4 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h4><p>w=4;r=2;x=1<br>目录最大权限666 文件最大权限777<br><code>chmod</code> 改权限<br><code>chown</code> 改文件用户组<br><code>lsattr</code> 查看文件隐藏属性<br><code>chattr</code> 改变文件隐藏属性<br><code>umask</code> 改文件默认权限<br>suid <code>chmod 4775</code> <code>chmod u+s</code><br>sgid 既可以针对目录，也可以针对文件，用户必须对此目录有r和x权限，才能进入目录;如果是文件，身份会变成所属组;如果是目录，任何用户在这个目录创建的文件所有者会变成当前目录所有者 <code>chmod 2775</code><br>sbid 只针对目录有效，普通用户对此目录有写入权限;设置之后，普通用户只能添加文件和删除自己的文件</p>
-<h2 id="攻击"><a href="#攻击" class="headerlink" title="攻击"></a>攻击</h2><p>入侵 Linux 服务器后需要清除哪些日志<br>web日志，如apache的access.log,error.log。 直接将日志清除过于明显,一般使用sed进行定向清除</p>
-<p>e.g. sed -i -e ‘/192.169.1.1/d’</p>
-<p>history命令的清除，也是对~/.bash_history进行定向清除</p>
-<p>wtmp日志的清除，/var/log/wtmp</p>
-<p>登录日志清除 /var/log/secure</p>
+        <h2 id="函数绕过"><a href="#函数绕过" class="headerlink" title="函数绕过"></a>函数绕过</h2><h3 id="in-array"><a href="#in-array" class="headerlink" title="in_array()"></a>in_array()</h3><p><code>bool in_array ( mixed $needle , array $haystack [, bool $strict = FALSE ] )</code><br>第三个参数默认为false,类型会转换,如果$needle是<code>7shell.php</code>那么<code>7</code>就会被解析为数字7.<br>当$strict为true是，会判断类型是否相同</p>
+<h3 id="htmlspecialchars"><a href="#htmlspecialchars" class="headerlink" title="htmlspecialchars()"></a>htmlspecialchars()</h3><p>html实体编码<br>用JavaScript伪协议绕过<br><code>%0a</code>换行符结合<code>//</code>注释</p>
+<p>### </p>
 
       
     </div>
@@ -474,8 +457,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/06/xss-game/" rel="next" title="xss game writeup">
-                <i class="fa fa-chevron-left"></i> xss game writeup
+              <a href="/2019/04/10/sql/" rel="next" title="sql总结">
+                <i class="fa fa-chevron-left"></i> sql总结
               </a>
             
           </div>
@@ -483,10 +466,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/09/php-trick/" rel="prev" title="php_trick">
-                php_trick <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -618,7 +597,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用命令"><span class="nav-number">1.</span> <span class="nav-text">常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一般"><span class="nav-number">1.0.1.</span> <span class="nav-text">一般</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用"><span class="nav-number">1.0.2.</span> <span class="nav-text">常用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#shell"><span class="nav-number">1.0.3.</span> <span class="nav-text">shell</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#权限"><span class="nav-number">1.0.4.</span> <span class="nav-text">权限</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#攻击"><span class="nav-number">2.</span> <span class="nav-text">攻击</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数绕过"><span class="nav-number">1.</span> <span class="nav-text">函数绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#in-array"><span class="nav-number">1.1.</span> <span class="nav-text">in_array()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#htmlspecialchars"><span class="nav-number">1.2.</span> <span class="nav-text">htmlspecialchars()</span></a></li></ol></li></ol></div>
             
 
           </div>

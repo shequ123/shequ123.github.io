@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="xxe">
+  <meta name="description" content="超级手册，总结所有能总结的姿势，争取做到「查就有」 xxe">
 <meta name="keywords" content="security">
 <meta property="og:type" content="article">
 <meta property="og:title" content="姿势手册">
 <meta property="og:url" content="http://j1nse.top/2019/04/10/hand/index.html">
 <meta property="og:site_name" content="cgtx&#39;s blog">
-<meta property="og:description" content="xxe">
+<meta property="og:description" content="超级手册，总结所有能总结的姿势，争取做到「查就有」 xxe">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-10T07:25:34.209Z">
+<meta property="og:updated_time" content="2019-04-11T15:27:33.840Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="姿势手册">
-<meta name="twitter:description" content="xxe">
+<meta name="twitter:description" content="超级手册，总结所有能总结的姿势，争取做到「查就有」 xxe">
 
 
 
@@ -367,12 +367,24 @@
                 
               
 
-              <time title="创建时间：2019-04-10 15:24:22 / 修改时间：15:25:34" itemprop="dateCreated datePublished" datetime="2019-04-10T15:24:22+08:00">2019-04-10</time>
+              <time title="创建时间：2019-04-10 15:24:22" itemprop="dateCreated datePublished" datetime="2019-04-10T15:24:22+08:00">2019-04-10</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-11 23:27:33" itemprop="dateModified" datetime="2019-04-11T23:27:33+08:00">2019-04-11</time>
               
             
           </span>
@@ -424,7 +436,8 @@
       
 
       
-        <h1 id="xxe"><a href="#xxe" class="headerlink" title="xxe"></a>xxe</h1><a id="more"></a>
+        <p>超级手册，总结所有能总结的姿势，争取做到「查就有」</p>
+<h1 id="xxe"><a href="#xxe" class="headerlink" title="xxe"></a>xxe</h1><a id="more"></a>
 <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>XXE(XML External Entity Injection) 全称为 XML外部实体注入<br>引入外部实体方式有多种，比如：</p>
 <ol>
 <li>file:// 协议直接引用本地文件</li>
@@ -432,6 +445,7 @@
 <li>由恶意dtd引用本地文件</li>
 <li>不同程序支持的协议不一样，可以造成其他危害</li>
 </ol>
+<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><p>改变content-type从json为XMl，可以尝试探测是否解析xml</p>
 <h2 id="危害"><a href="#危害" class="headerlink" title="危害"></a>危害</h2><ol>
 <li><p>读取任意文件<br>直接用&lt;!ENTITY xxe SYSTEM “file:///etc/passwd”&gt;</p>
 <d>&xxe;</d>
@@ -454,7 +468,7 @@ xmlData = etree.parse(xmlSource,etree.XMLParser(resolve_entities=False))</code><
 <h1 id="浏览器安全"><a href="#浏览器安全" class="headerlink" title="浏览器安全"></a>浏览器安全</h1><p>以同源策略为基础，延伸的<code>access-control-allow-origin</code>等</p>
 <h1 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h1><h2 id="危害-1"><a href="#危害-1" class="headerlink" title="危害"></a>危害</h2><ol>
 <li>盗取cookie</li>
-<li>蠕虫</li>
+<li>蠕虫<br>XSS蠕虫的产生条件<br>正常情况下，一个是产生XSS点的页面不属于self页面，用户之间产生交互行为的页面，都可能造成XSS Worm的产生。不一定需要存储型XSS</li>
 <li>代替用户操作，例如删除文章，发送动态等</li>
 <li>获取用户信息</li>
 </ol>
@@ -496,12 +510,12 @@ xmlData = etree.parse(xmlSource,etree.XMLParser(resolve_entities=False))</code><
 <li>char()</li>
 <li>单行注释<code>-- -</code>,<code>#</code>,<code>;%00</code></li>
 <li>多行注释<code>/*xxxx*/</code>,`</li>
-<li>连接符<code>+</code>,<code>||</code><h2 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a>盲注</h2>没有回显<h2 id="时间盲注"><a href="#时间盲注" class="headerlink" title="时间盲注"></a>时间盲注</h2><h2 id="攻击"><a href="#攻击" class="headerlink" title="攻击"></a>攻击</h2></li>
+<li>连接符<code>+</code>,<code>||</code><h2 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a>盲注</h2>没有回显<h2 id="时间盲注"><a href="#时间盲注" class="headerlink" title="时间盲注"></a>时间盲注</h2>sleep和benchmark<br>1.让两个非常大的数据表做笛卡尔积产生大量的计算从而产生时间延迟<br>2.如果服务器端采用长连接的话可以利用Mysql的锁机制即Get_lock()<br>3.利用复杂的正则表达式去匹配一个超长字符串来产生时间延迟<h2 id="攻击"><a href="#攻击" class="headerlink" title="攻击"></a>攻击</h2></li>
 <li>读取文件 <code>LOAD_FILE</code></li>
 <li>写入shell</li>
 <li>命令执行<h2 id="宽字符"><a href="#宽字符" class="headerlink" title="宽字符"></a>宽字符</h2>有时候会吞掉转义字符<h2 id="防御-3"><a href="#防御-3" class="headerlink" title="防御"></a>防御</h2></li>
 <li>过滤</li>
-<li>预编译语句</li>
+<li>预编译语句<br>原理:<br>使用参数化查询数据库服务器不会把参数的内容当作sql指令的一部分来执行，是在数据库完成sql指令的编译后才套用参数运行<br>简单的说:<br>参数化能防注入的原因在于,语句是语句，参数是参数，参数的值并不是语句的一部分，数据库只按语句的语义跑</li>
 <li>使用储存过程</li>
 <li>检查数据类型</li>
 <li>使用安全函数</li>
@@ -566,6 +580,14 @@ xmlData = etree.parse(xmlSource,etree.XMLParser(resolve_entities=False))</code><
 <h2 id="远程文件包含"><a href="#远程文件包含" class="headerlink" title="远程文件包含"></a>远程文件包含</h2><ol>
 <li><code>allow_url_include()</code>打开</li>
 </ol>
+<h2 id="ddos"><a href="#ddos" class="headerlink" title="ddos"></a>ddos</h2><p>Ddos原理<br>利用合理的请求造成资源过载，导致服务不可用</p>
+<p>syn洪流的原理<br>伪造大量的源IP地址，分别向服务器端发送大量的SYN包，此时服务器端会返回SYN/ACK包，因为源地址是伪造的，所以伪造的IP并不会应答，服务器端没有收到伪造IP的回应，会重试3～5次并且等待一个SYNTime（一般为30秒至2分钟），如果超时则丢弃这个连接。攻击者大量发送这种伪造源地址的SYN请求，服务器端将会消耗非常多的资源（CPU和内存）来处理这种半连接，同时还要不断地对这些IP进行SYN+ACK重试。最后的结果是服务器无暇理睬正常的连接请求，导致拒绝服务。</p>
+<p>CC攻击原理<br>对一些消耗资源较大的应用页面不断发起正常的请求，以达到消耗服务端资源的目的。</p>
+<p>DDOS防护<br>SYN Cookie/SYN Proxy、safereset等算法。SYN Cookie的主要思想是为每一个IP地址分配一个“Cookie”，并统计每个IP地址的访问频率。如果在短时间内收到大量的来自同一个IP地址的数据包，则认为受到攻击，之后来自这个IP地址的包将被丢弃。</p>
+<h2 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h2><p>Redis未授权访问<br>产生原因<br>Redis 默认情况下，会绑定在 0.0.0.0:6379，这样将会将 Redis 服务暴露到公网上，如果在没有开启认证的情况下，可以导致任意用户在可以访问目标服务器的情况下未授权访问 Redis 以及读取 Redis 的数据。攻击者在未授权访问 Redis 的情况下可以利用 Redis 的相关方法，可以成功在 Redis 服务器上写入公钥，进而可以使用对应私钥直接登录目标服务器</p>
+<p>利用条件和方法</p>
+<p>条件:<br>redis服务以root账户运行<br>redis无密码或弱密码进行认证<br>redis监听在0.0.0.0公网上</p>
+<p>方法:<br>通过 Redis 的 INFO 命令, 可以查看服务器相关的参数和敏感信息, 为攻击者的后续渗透做铺垫<br>上传SSH公钥获得SSH登录权限<br>通过crontab反弹shell<br>slave主从模式利用<br>修复<br>密码验证<br>降权运行<br>限制ip/修改端口</p>
 <h1 id="暂时不知道分类"><a href="#暂时不知道分类" class="headerlink" title="暂时不知道分类"></a>暂时不知道分类</h1><h2 id="技巧-2"><a href="#技巧-2" class="headerlink" title="技巧"></a>技巧</h2><ol>
 <li><a>可以有noreferrer类型，可以不发送referer</a></li>
 <li><canvas>可以识别简单的验证码,图片导入，分割字符</canvas></li>
@@ -610,6 +632,10 @@ xmlData = etree.parse(xmlSource,etree.XMLParser(resolve_entities=False))</code><
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/10/sql/" rel="prev" title="sql总结">
+                sql总结 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -680,7 +706,7 @@ xmlData = etree.parse(xmlSource,etree.XMLParser(resolve_entities=False))</code><
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -741,7 +767,7 @@ xmlData = etree.parse(xmlSource,etree.XMLParser(resolve_entities=False))</code><
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#xxe"><span class="nav-number">1.</span> <span class="nav-text">xxe</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#危害"><span class="nav-number">1.2.</span> <span class="nav-text">危害</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防御"><span class="nav-number">1.3.</span> <span class="nav-text">防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">1.4.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#浏览器安全"><span class="nav-number">2.</span> <span class="nav-text">浏览器安全</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#XSS"><span class="nav-number">3.</span> <span class="nav-text">XSS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#危害-1"><span class="nav-number">3.1.</span> <span class="nav-text">危害</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#技巧"><span class="nav-number">3.2.</span> <span class="nav-text">技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防御-1"><span class="nav-number">3.3.</span> <span class="nav-text">防御</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CSRF"><span class="nav-number">4.</span> <span class="nav-text">CSRF</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">4.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#危害-2"><span class="nav-number">4.2.</span> <span class="nav-text">危害</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防御-2"><span class="nav-number">4.3.</span> <span class="nav-text">防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本质"><span class="nav-number">4.4.</span> <span class="nav-text">本质</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sql注入"><span class="nav-number">5.</span> <span class="nav-text">Sql注入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#普通注入"><span class="nav-number">5.1.</span> <span class="nav-text">普通注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#盲注"><span class="nav-number">5.2.</span> <span class="nav-text">盲注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间盲注"><span class="nav-number">5.3.</span> <span class="nav-text">时间盲注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#攻击"><span class="nav-number">5.4.</span> <span class="nav-text">攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#宽字符"><span class="nav-number">5.5.</span> <span class="nav-text">宽字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防御-3"><span class="nav-number">5.6.</span> <span class="nav-text">防御</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件上传"><span class="nav-number">6.</span> <span class="nav-text">文件上传</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#技巧-1"><span class="nav-number">6.1.</span> <span class="nav-text">技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#危害-3"><span class="nav-number">6.2.</span> <span class="nav-text">危害</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防御-4"><span class="nav-number">6.3.</span> <span class="nav-text">防御</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#认证与会话管理"><span class="nav-number">7.</span> <span class="nav-text">认证与会话管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#session"><span class="nav-number">7.1.</span> <span class="nav-text">session</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sso"><span class="nav-number">7.2.</span> <span class="nav-text">sso</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#劫持"><span class="nav-number">8.</span> <span class="nav-text">劫持</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#clickJacking"><span class="nav-number">8.1.</span> <span class="nav-text">clickJacking</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图片劫持"><span class="nav-number">8.2.</span> <span class="nav-text">图片劫持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他劫持"><span class="nav-number">8.3.</span> <span class="nav-text">其他劫持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防御-5"><span class="nav-number">8.4.</span> <span class="nav-text">防御</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#密码学"><span class="nav-number">9.</span> <span class="nav-text">密码学</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密钥管理"><span class="nav-number">9.1.</span> <span class="nav-text">密钥管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伪随机数"><span class="nav-number">9.2.</span> <span class="nav-text">伪随机数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP"><span class="nav-number">10.</span> <span class="nav-text">PHP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件包含"><span class="nav-number">10.1.</span> <span class="nav-text">文件包含</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量覆盖"><span class="nav-number">10.2.</span> <span class="nav-text">变量覆盖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码执行"><span class="nav-number">10.3.</span> <span class="nav-text">代码执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件写入"><span class="nav-number">10.4.</span> <span class="nav-text">文件写入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态函数执行"><span class="nav-number">10.5.</span> <span class="nav-text">动态函数执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回调函数执行"><span class="nav-number">10.6.</span> <span class="nav-text">回调函数执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反序列化"><span class="nav-number">10.7.</span> <span class="nav-text">反序列化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防御-6"><span class="nav-number">10.8.</span> <span class="nav-text">防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程文件包含"><span class="nav-number">10.9.</span> <span class="nav-text">远程文件包含</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#暂时不知道分类"><span class="nav-number">11.</span> <span class="nav-text">暂时不知道分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#技巧-2"><span class="nav-number">11.1.</span> <span class="nav-text">技巧</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#xxe"><span class="nav-number">1.</span> <span class="nav-text">xxe</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#案例"><span class="nav-number">1.2.</span> <span class="nav-text">案例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#危害"><span class="nav-number">1.3.</span> <span class="nav-text">危害</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防御"><span class="nav-number">1.4.</span> <span class="nav-text">防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">1.5.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#浏览器安全"><span class="nav-number">2.</span> <span class="nav-text">浏览器安全</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#XSS"><span class="nav-number">3.</span> <span class="nav-text">XSS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#危害-1"><span class="nav-number">3.1.</span> <span class="nav-text">危害</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#技巧"><span class="nav-number">3.2.</span> <span class="nav-text">技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防御-1"><span class="nav-number">3.3.</span> <span class="nav-text">防御</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CSRF"><span class="nav-number">4.</span> <span class="nav-text">CSRF</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">4.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#危害-2"><span class="nav-number">4.2.</span> <span class="nav-text">危害</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防御-2"><span class="nav-number">4.3.</span> <span class="nav-text">防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本质"><span class="nav-number">4.4.</span> <span class="nav-text">本质</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sql注入"><span class="nav-number">5.</span> <span class="nav-text">Sql注入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#普通注入"><span class="nav-number">5.1.</span> <span class="nav-text">普通注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#盲注"><span class="nav-number">5.2.</span> <span class="nav-text">盲注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间盲注"><span class="nav-number">5.3.</span> <span class="nav-text">时间盲注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#攻击"><span class="nav-number">5.4.</span> <span class="nav-text">攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#宽字符"><span class="nav-number">5.5.</span> <span class="nav-text">宽字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防御-3"><span class="nav-number">5.6.</span> <span class="nav-text">防御</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件上传"><span class="nav-number">6.</span> <span class="nav-text">文件上传</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#技巧-1"><span class="nav-number">6.1.</span> <span class="nav-text">技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#危害-3"><span class="nav-number">6.2.</span> <span class="nav-text">危害</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防御-4"><span class="nav-number">6.3.</span> <span class="nav-text">防御</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#认证与会话管理"><span class="nav-number">7.</span> <span class="nav-text">认证与会话管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#session"><span class="nav-number">7.1.</span> <span class="nav-text">session</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sso"><span class="nav-number">7.2.</span> <span class="nav-text">sso</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#劫持"><span class="nav-number">8.</span> <span class="nav-text">劫持</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#clickJacking"><span class="nav-number">8.1.</span> <span class="nav-text">clickJacking</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图片劫持"><span class="nav-number">8.2.</span> <span class="nav-text">图片劫持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他劫持"><span class="nav-number">8.3.</span> <span class="nav-text">其他劫持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防御-5"><span class="nav-number">8.4.</span> <span class="nav-text">防御</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#密码学"><span class="nav-number">9.</span> <span class="nav-text">密码学</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密钥管理"><span class="nav-number">9.1.</span> <span class="nav-text">密钥管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伪随机数"><span class="nav-number">9.2.</span> <span class="nav-text">伪随机数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP"><span class="nav-number">10.</span> <span class="nav-text">PHP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件包含"><span class="nav-number">10.1.</span> <span class="nav-text">文件包含</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量覆盖"><span class="nav-number">10.2.</span> <span class="nav-text">变量覆盖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码执行"><span class="nav-number">10.3.</span> <span class="nav-text">代码执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件写入"><span class="nav-number">10.4.</span> <span class="nav-text">文件写入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态函数执行"><span class="nav-number">10.5.</span> <span class="nav-text">动态函数执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回调函数执行"><span class="nav-number">10.6.</span> <span class="nav-text">回调函数执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反序列化"><span class="nav-number">10.7.</span> <span class="nav-text">反序列化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防御-6"><span class="nav-number">10.8.</span> <span class="nav-text">防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程文件包含"><span class="nav-number">10.9.</span> <span class="nav-text">远程文件包含</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ddos"><span class="nav-number">10.10.</span> <span class="nav-text">ddos</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis"><span class="nav-number">10.11.</span> <span class="nav-text">redis</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#暂时不知道分类"><span class="nav-number">11.</span> <span class="nav-text">暂时不知道分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#技巧-2"><span class="nav-number">11.1.</span> <span class="nav-text">技巧</span></a></li></ol></li></ol></div>
             
 
           </div>
